@@ -16,7 +16,7 @@ return {
     config = function()
       require"lualine".setup{
         options = {
-          theme = "horizon"
+          theme = "horizon",
         }
       }
     end
@@ -33,8 +33,21 @@ return {
     config = function()
       require"bufferline".setup{
         options = {
-          diagnostics = "nvim_lsp"
-        }
+          diagnostics = "nvim_lsp",
+          numbers = "buffer_id",
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local icon = level:match("error") and "e" or "w"
+            return " " .. icon .. count
+          end,
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              highlight = "Directory",
+              separator = true
+            }
+          }
+        },
       }
     end
   },
